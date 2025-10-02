@@ -1,0 +1,46 @@
+services:
+ poliklinik-app:
+  build:
+    context: .
+    dockerfile: Dockerfile
+  container_name: poliklinik-app
+  volumes:
+   - ./:/app
+  ports:
+   - "8000:8000"
+  depends_on:
+   - db-poli
+ db-poli:
+  image: mariadb
+  container_name: db-poli
+  restart: always
+  environment:
+   - MYSQL_ROOT_PASSWORD=root
+   - MYSQL_USER=root
+   - MYSQL_PASSWORD=root
+   - MYSQL_DATABASE=poliklinik
+  command: --default-authentication-plugin=mysql_native_password
+  healthcheck:
+   test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$$MYSQL_ROOT_PASSWORD"]
+   interval: 5s
+   timeout: 5s
+   retries: 20
+  ports:
+   - "3306:3306"
+  volumes:
+   - mariadb_data:/var/lib/mysql
+ phpmyadmin:
+  image: phpmyadmin/phpmyadmin
+  container_name: phpmyadmin-poli
+  restart: always
+  ports:
+   - "8080:80"
+  environment:
+   - PMA_HOST=db-poli
+   - PMA_PORT=3306
+   - MYSQL_ROOT_PASSWORD=root
+  depends_on:
+   - db-poli
+
+volumes:
+ mariadb_data:
