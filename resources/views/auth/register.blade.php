@@ -1,44 +1,103 @@
-<h2>Register</h2>
+<x-layouts.guest title="Register">
+    <div class="login-box d-flex flex-column justify-content-center align-items-center w-100 vh-100">
+        {{-- login-logo --}}
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center text-lg">
+                <b>Poli</b>klinik
+            </div>
 
-@if($errors->any())
-    <ul style="color: red">
-        @foreach($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-@endif
+            <div class="card-body">
+                <p class="login-box-msg">Register akun baru</p>
+                <form action="{{ route('register') }}" method="POST">
+                    @csrf
 
-<form method="POST" action="{{ route('register') }}">
-    @csrf
-    <div>
-        <label for="nama">Name:</label>
-        <input type="text" id="nama" name="nama" required>
-    </div>
-    <div>
-        <label for="alamat">Address:</label>
-        <input type="text" id="alamat" name="alamat" required>
-    </div>
-    <div>
-        <label for="no_ktp">KTP Number:</label>
-        <input type="text" id="no_ktp" name="no_ktp" required>
-    </div>
-    <div>
-        <label for="no_hp">Phone Number:</label>
-        <input type="text" id="no_hp" name="no_hp" required>
-    </div>
-    <div>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-    </div>
-    <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-    </div>
-    <div>
-        <label for="password_confirmation">Confirm Password:</label>
-        <input type="password" id="password_confirmation" name="password_confirmation" required>
-    </div>
-    <button type="submit">Register</button>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" required placeholder="Nama Lengkap" name="nama">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
 
-</form>
-<p>Already have an account? <a href="{{ route('login') }}">Login here</a></p>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" required placeholder="Email" name="email">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" required placeholder="Alamat" name="alamat">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-map-marker"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" required placeholder="No HP" name="no_hp">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-phone-square"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" required placeholder="No KTP" name="no_ktp">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-address-book"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" required placeholder="Password" name="password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" required placeholder="Confirm Password"
+                            name="password_confirmation">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul class="mb-0">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <div class="row">
+                        <div class="col-12 text-right">
+                            <button type="submit" class="btn btn-primary btn-block">Register</button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="row justify-content-center mt-3">
+                    <div class="col-12 text-center">
+                        <p>Sudah punya akun? <a href="{{ route('login') }}">Login</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</x-layouts.guest>
