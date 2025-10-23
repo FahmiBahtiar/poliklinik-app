@@ -46,6 +46,22 @@
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('pasien.index') }}" class="nav-link {{ request()->routeIs('pasien.*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-procedures"></i>
+                            <p>
+                                Data Pasien
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('obat.index') }}" class="nav-link {{ request()->routeIs('obat.*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-pills"></i>
+                            <p>
+                                Data Obat
+                            </p>
+                        </a>
+                    </li>
                 @endif
 
                 <!-- ROLE PASIEN -->
@@ -72,6 +88,7 @@
                     </li>
                 @endif
 
+                <!-- LOGOUT -->
                 <li class="nav-item ">
                     <form method="POST" action="/logout">
                         @csrf

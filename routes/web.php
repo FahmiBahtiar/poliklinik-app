@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\PasienController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DokterController;
+use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PoliController;
 use App\Models\Poli;
 use Illuminate\Support\Facades\Route;
@@ -15,8 +17,8 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 #Route Dashboard with roles
 
@@ -27,6 +29,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     })->name('admin.dashboard');
     Route::resource('polis', PoliController::class);
     Route::resource('dokter', DokterController::class);
+    Route::resource('pasien', PasienController::class);
+    Route::resource('obat', ObatController::class);
 });
 
 #dokter
