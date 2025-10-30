@@ -54,7 +54,7 @@
                                         Belum ada Obat
                                     </td>
                                 </tr>
-                            @endforelse
+                            @endforelse 
                         </tbody>
                     </table>
                 </div>
